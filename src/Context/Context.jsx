@@ -19,15 +19,15 @@ const Context = (props) => {
   }
 
   useEffect(() => {
-   const fetchData = async ()=>{
-    try {
-      const data = await fetchImages(pages, 10)
-      setimages(data)
-    } catch (error) {
-      console.log(error)
+    const fetchData = async () => {
+      try {
+        const data = await fetchImages(pages, 10)
+        setimages(data)
+      } catch (error) {
+        console.log(error)
+      }
     }
-   }
-   fetchData()
+    fetchData()
   }, [pages])
 
 
@@ -35,9 +35,9 @@ const Context = (props) => {
 
 
 
-  return <context.Provider value={{images, setimages, pages, setpages, prevPageHandler, nextPageHandler}}>
+  return <context.Provider value={{ images, setimages, pages, setpages, prevPageHandler, nextPageHandler }}>
     {props.children}
   </context.Provider>
 }
 
-export { context, Context}
+export { context, Context }

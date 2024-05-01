@@ -1,29 +1,40 @@
 import React from 'react'
 import './index.css'
 import Nav from './Components/Nav'
-import { Route, Routes, useNavigate } from 'react-router-dom'
-import Home from './Components/Home'
-import Entry from './Components/Entry'
-import Library from './Components/Library'
-import Details from './Components/Details'
+import { useContext } from 'react'
+import { context } from './Context/Context'
+
 
 const App = () => {
- const navigate =  useNavigate()
- const submitHandler = ()=>{
 
- }
+const {images, prevPageHandler, nextPageHandler} = useContext(context)
+
+let renderimages = 'loading...'
+if (images.length > 0) {
+  renderimages = images.map((image) => (
+    <div className='w-[30%] shadow p-5' key={image.id}>
+      <img src={image.download_url} alt={image.author} />
+      <h1>{image.author}</h1>
+    </div>
+  ))
+}
+
+
   return (
   <div className='main w-screen h-screen'>
-      <Nav>   </Nav>
-      <Routes>
-        <Route  path='/' element={<Home />}/>
-        <Route path='/Entry'  element={<Entry />}/>
-        <Route path='/Library'  element={<Library />}>
-        <Route path='/Library/:id'  element={<Details />}/>
-        </Route>
-       
-      </Routes>
-  
+      <Nav />
+      <hr />
+      <br />
+      <div className="box flex flex-wrap min-h-screen w-full">
+      {renderimages}
+    </div>
+
+   <div className="pagination text-center pb-10 cursor-pointer">
+   <span onClick={prevPageHandler}  className='capitalize text-green-400 text-3xl mr-10'>prev</span>
+    <span onClick={nextPageHandler}  className='capitalize text-green-400 text-3xl mr-10'>Next</span>
+      
+    
+   </div>
   </div>
 
 
